@@ -1,0 +1,57 @@
+import React from "react";
+import {
+  FaRegStickyNote,
+  FaEye,
+  FaTrash
+} from "react-icons/fa";
+
+function NoteCard({ title, description, date }) {
+  return (
+    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-5 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[260px]">
+
+      {/* Top Section */}
+      <div>
+
+        <div className="flex items-center justify-between mb-4">
+
+          <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
+            <FaRegStickyNote className="text-blue-600 text-xl" />
+          </div>
+
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {date}
+          </span>
+
+        </div>
+
+        {/* Title */}
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+          {title}
+        </h2>
+
+        {/* Description */}
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-6">
+          {description}
+        </p>
+
+      </div>
+
+      {/* Bottom Action Icons */}
+      <div className="flex justify-end gap-3 mt-6">
+
+        {/* View */}
+        <button className="w-9 h-9 rounded-lg bg-blue-100 hover:bg-blue-600 hover:text-white dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center transition-all duration-300">
+          <FaEye />
+        </button>
+
+        {/* Delete */}
+        <button className="w-9 h-9 rounded-lg bg-red-100 hover:bg-red-600 hover:text-white dark:bg-red-500/20 dark:text-red-400 flex items-center justify-center transition-all duration-300">
+          <FaTrash />
+        </button>
+
+      </div>
+    </div>
+  );
+}
+
+export default NoteCard
