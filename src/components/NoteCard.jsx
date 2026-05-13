@@ -1,11 +1,11 @@
 import React from "react";
 import {
   FaRegStickyNote,
-  FaEye,
+  FaEdit,
   FaTrash
 } from "react-icons/fa";
 
-function NoteCard({ title, description, date }) {
+function NoteCard({ id, title, description, date, subjects = [], handleEdit, handleDelete }) {
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-5 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[260px]">
 
@@ -39,13 +39,31 @@ function NoteCard({ title, description, date }) {
       {/* Bottom Action Icons */}
       <div className="flex justify-end gap-3 mt-6">
 
+        {/* Subject Tags */}
+        <div className="flex flex-wrap gap-2 justify-start items-start w-full">
+          {subjects.map((subject) => (
+            <span
+              key={subject}
+              className="px-3 py-2 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 text-xs font-semibold"
+            >
+              {subject}
+            </span>
+          ))}
+        </div>
+
         {/* View */}
-        <button className="w-9 h-9 rounded-lg bg-blue-100 hover:bg-blue-600 hover:text-white dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center transition-all duration-300">
-          <FaEye />
+        <button
+          onClick={() => handleEdit({ id, title, description })}
+          className="w-9 h-9 rounded-lg bg-blue-100 hover:bg-blue-600 hover:text-white dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center transition-all duration-300"
+        >
+          <FaEdit />
         </button>
 
         {/* Delete */}
-        <button className="w-9 h-9 rounded-lg bg-red-100 hover:bg-red-600 hover:text-white dark:bg-red-500/20 dark:text-red-400 flex items-center justify-center transition-all duration-300">
+        <button
+          onClick={() => handleDelete(id)}
+          className="w-9 h-9 rounded-lg bg-red-100 hover:bg-red-600 hover:text-white dark:bg-red-500/20 dark:text-red-400 flex items-center justify-center transition-all duration-300"
+        >
           <FaTrash />
         </button>
 

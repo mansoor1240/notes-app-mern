@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import SideBar from '../components/Sidebar'
+import { useNotes } from '../context/NotesContext'
 
-function MainLayout({ children, dark, setDark }) {
+function MainLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { dark, setDark } = useNotes()
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
