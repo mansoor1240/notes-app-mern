@@ -7,14 +7,14 @@ import {
 
 function NoteCard({ id, title, description, date, subjects = [], handleEdit, handleDelete }) {
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-5 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[260px]">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[210px]">
 
       {/* Top Section */}
       <div>
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
 
-          <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
             <FaRegStickyNote className="text-blue-600 text-xl" />
           </div>
 
@@ -25,26 +25,26 @@ function NoteCard({ id, title, description, date, subjects = [], handleEdit, han
         </div>
 
         {/* Title */}
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+        <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
           {title}
         </h2>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-6">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-5">
           {description}
         </p>
 
       </div>
 
       {/* Bottom Action Icons */}
-      <div className="flex justify-end gap-3 mt-6">
+      <div className="flex justify-end gap-3 mt-4">
 
         {/* Subject Tags */}
         <div className="flex flex-wrap gap-2 justify-start items-start w-full">
           {subjects.map((subject) => (
             <span
               key={subject}
-              className="px-3 py-2 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 text-xs font-semibold"
+              className="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 text-xs font-semibold"
             >
               {subject}
             </span>

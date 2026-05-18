@@ -89,9 +89,8 @@ function AddNoteModal({ isOpen, setIsOpen, notes, setNotes, editingNote, setEdit
                 id: Date.now(),
                 title: formData.title,
                 description: formData.description,
-                subject: formData.subject,
                 subjects: formData.subject,
-                date: 'Today'
+                date: new Date().toLocaleDateString(),
             }
 
             setNotes([newNote, ...notes])

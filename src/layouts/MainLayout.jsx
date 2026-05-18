@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import SideBar from '../components/Sidebar'
@@ -9,30 +10,43 @@ function MainLayout({ children }) {
   const { dark, setDark } = useNotes()
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
-      
+    <div className="h-screen overflow-hidden bg-white dark:bg-gray-900 text-black dark:text-white">
+
       <Navbar dark={dark} setDark={setDark} />
 
       {/* Mobile Hamburger */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden fixed top-20 left-4 z-50 bg-gray-900 text-white p-3 rounded-xl shadow-lg"
+        aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+        className={`lg:hidden fixed top-20 z-[70] 
+             rounded-xl shadow-lg transition-all duration-500
+             w-12 h-12 flex items-center justify-center
+                 ${sidebarOpen
+            ? 'right-4 bg-white'
+            : 'left-4 bg-gray-900 text-white'
+          }`}
       >
-        {sidebarOpen ? <FaTimes /> : <FaBars />}
+        <span className="transition-all duration-300">
+          {sidebarOpen ? (
+            <FaTimes className="text-red-500 text-2xl" />
+          ) : (
+            <FaBars className="text-xl" />
+          )}
+        </span>
       </button>
 
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="lg:hidden fixed inset-0 bg-black/40 z-30"
+          className="lg:hidden fixed inset-0 bg-black/40 z-[55]"
         />
       )}
 
       {/* Sidebar */}
       <div
         className={`
-          fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] z-40
+          fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] z-[60]
           transform transition-transform duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           lg:translate-x-0
@@ -42,8 +56,8 @@ function MainLayout({ children }) {
       </div>
 
       {/* Main Content */}
-      <main className="p-4 lg:p-5 lg:ml-64">
-        {children}
+      <main className="h-[calc(100vh-4rem)] overflow-auto p-3 lg:p-4 lg:ml-64">
+        {children || <Outlet />}
       </main>
 
     </div>

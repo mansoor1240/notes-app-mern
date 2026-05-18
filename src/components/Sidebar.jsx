@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import {FaStickyNote,FaStar, FaTrash,FaFolder,
+import {
+  FaStickyNote, FaStar, FaTrash, FaFolder,
   FaHome,
   FaChevronDown,
   FaChevronUp
@@ -11,7 +12,7 @@ function SideBar() {
   const [openCategory, setOpenCategory] = useState(false)
 
   const menuItems = [
-    { name: 'All Notes', path: '/', icon: <FaHome /> },
+    { name: 'All Notes', path: '/dashboard', icon: <FaHome /> },
     { name: 'Important Notes', path: '/important', icon: <FaStar /> },
     { name: 'Trash', path: '/trash', icon: <FaTrash /> },
   ]
@@ -25,7 +26,7 @@ function SideBar() {
 
 
   return (
-    <div className="w-full h-full bg-gray-900 dark:bg-gray-800 text-white p-5">
+    <div className="w-full h-full bg-gray-900 dark:bg-gray-800 text-white p-5 ">
 
       {/* Logo */}
       <div className="flex items-center gap-3 mb-10">
@@ -62,35 +63,56 @@ function SideBar() {
         <li>
           <button
             onClick={() => setOpenCategory(!openCategory)}
-            className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 bg-gray-900/40 hover:bg-gray-800 hover:text-white transition-all duration-300 group"
-          >
-            <div className="flex items-center gap-3">
-              <span className="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+            className="w-full flex items-center justify-between px-3 py-2 rounded-xl
+            bg-gradient-to-r from-gray-800 to-gray-900
+            border border-gray-700 text-gray-200
+           hover:border-blue-500 transition-all duration-300">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center text-sm">
                 <FaFolder />
-              </span>
+              </div>
 
-              <span className="font-medium">Categories</span>
+              <div className="text-left">
+                <p className="font-medium text-sm">Categories</p>
+                <p className="text-[10px] text-gray-400">
+                  {subjects.length} Subjects
+                </p>
+              </div>
             </div>
 
-            <span className="text-gray-400 group-hover:text-white transition-all duration-300">
-              {openCategory ? <FaChevronUp /> : <FaChevronDown />}
+            <span
+              className={`text-sm transition-transform duration-300 ${openCategory ? 'rotate-180' : ''
+                }`}
+            >
+              <FaChevronDown />
             </span>
           </button>
 
-          {/* Dropdown Items */}
           {openCategory && (
-            <ul className="ml-4 mt-3 space-y-2 border-l border-gray-700 pl-4">
+            <div className="mt-2 ml-2 rounded-xl bg-gray-800/70 border border-gray-700 p-2 space-y-1">
               {subjects.map((subject) => (
-                <li key={subject}>
-                  <NavLink
-                    to={`/category/${subject}`}
-                    className="block px-4 py-2 rounded-lg text-sm text-gray-300 hover:bg-blue-500/10 hover:text-blue-400 transition-all duration-300"
-                  >
+                <NavLink
+                  key={subject}
+                  to={`/category/${subject}`}
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2 rounded-lg text-xs transition-all duration-300
+            ${isActive
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    }`
+                  }
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     {subject}
-                  </NavLink>
-                </li>
+                  </span>
+
+                  <span className="text-[10px] bg-gray-900/60 px-1.5 py-0.5 rounded-full">
+                    Notes
+                  </span>
+                </NavLink>
               ))}
-            </ul>
+            </div>
           )}
         </li>
 

@@ -1,9 +1,20 @@
 import React, { useState } from 'react'
 import { FaUserCircle, FaMoon, FaSun } from 'react-icons/fa'
 import SearchBar from './SearchBar'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-function Navbar({ dark, setDark }) {
+function Navbar({ dark, setDark, notes }) {
   const [open, setOpen] = useState(false)
+
+  const navigate = useNavigate()
+
+  const { logoutUser } = useAuth()
+
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/login')
+  }
 
   // Toggle Dark Mode
   const toggleDarkMode = () => {
@@ -11,10 +22,10 @@ function Navbar({ dark, setDark }) {
   }
 
   return (
-    <div className="w-full h-16 bg-white dark:bg-gray-900 shadow-md flex items-center justify-between px-6 sticky top-0 z-10">
+    <div className="w-full h-16 bg-white dark:bg-gray-900 shadow-md flex items-center justify-between px-6 sticky top-0 z-[80]">
 
       {/* Search Bar */}
-      <SearchBar />
+      <SearchBar notes={notes} />
 
       {/* Right Section */}
       <div className="flex items-center gap-6">
@@ -58,7 +69,10 @@ function Navbar({ dark, setDark }) {
                 Settings
               </button>
 
-              <button className="w-full text-left px-4 py-2 hover:bg-red-500 hover:text-white dark:text-white">
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-4 py-2 hover:bg-red-500 hover:text-white dark:text-white"
+              >
                 Logout
               </button>
 
